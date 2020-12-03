@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Security Camera</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <img >
+        <button type="button" onclick="rotate(-15)">Rotate Left</button>
+        <button type="button" onclick="rotate(15)">Rotate Right</button>
+        <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script>
+            function rotate(rotation) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "{{ url_for('rotate') }}", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("rotation="+rotation);
+            }
+        </script>
+    </body>
+</html>
