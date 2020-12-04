@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <img >
+        <img src="{{ url_for('camera') }}">
         <button type="button" onclick="rotate(-15)">Rotate Left</button>
         <button type="button" onclick="rotate(15)">Rotate Right</button>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
