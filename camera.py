@@ -43,7 +43,7 @@ class Camera:
         if self.MIN_ANGLE < angle < self.MAX_ANGLE:
             self.__pi.set_servo_pulsewidth(self.SERVO_1, 500 + (angle / 180) * 2000)
         else:
-            raise ValueError()
+            raise ValueError(f"Value must be between {self.MIN_ANGLE} and {self.MAX_ANGLE}")
 
     @property
     def servo2_rotation(self):
@@ -54,7 +54,7 @@ class Camera:
         if self.MIN_ANGLE < angle < self.MAX_ANGLE:
             self.__pi.set_servo_pulsewidth(self.SERVO_2, 500 + (angle / 180) * 2000)
         else:
-            raise ValueError
+            raise ValueError(f"Value must be between {self.MIN_ANGLE} and {self.MAX_ANGLE}")
 
     def get_frame(self):
         # Process and return frame
