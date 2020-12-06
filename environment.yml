@@ -1,4 +1,4 @@
-name: iot-security-camera_env
+name: iot-security-camera
 channels:
   - defaults
 dependencies:
@@ -20,4 +20,6 @@ dependencies:
   - wheel=0.36.0=pyhd3eb1b0_0
   - wincertstore=0.2=py38_0
   - zlib=1.2.11=h62dcd97_4
+  - pip:
+    - pigpio==1.78
 
