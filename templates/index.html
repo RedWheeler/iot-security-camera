@@ -30,32 +30,46 @@
                 <input type="checkbox" onclick="toggle_object_detection()">Object Detection</input>
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            <select id="resolution" onchange="change_resolution()">
+                <option value="LOW">360p</option>
+                <option value="MEDIUM">720p</option>
+                <option value="HIGH">1080p</option>
+            </select>
+        </div>
         <div class="d-flex justify-content-center m-3">
             <img height="360" width="640" src="{{ url_for('camera') }}">
         </div>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
         <script>
+            function change_resolution() {
+                resolution = document.getElementById("resolution").value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "{{ url_for('change_resolution') }}", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("resolution="+resolution);
+            }
             function toggle_sweep() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "{{ url_for('toggle_sweep') }}", false);
+                xhttp.open("POST", "{{ url_for('toggle_sweep') }}", true);
                 xhttp.send();
             }
             function toggle_object_detection() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "{{ url_for('toggle_object_detection') }}", false);
+                xhttp.open("POST", "{{ url_for('toggle_object_detection') }}", true);
                 xhttp.send();
             }
             function rotate_servo1(rotation) {
                 document.getElementById("sweep").checked = false;
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "{{ url_for('rotate_servo1') }}", false);
+                xhttp.open("POST", "{{ url_for('rotate_servo1') }}", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("rotation="+rotation);
             }
             function rotate_servo2(rotation) {
                 document.getElementById("sweep").checked = false;
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "{{ url_for('rotate_servo2') }}", false);
+                xhttp.open("POST", "{{ url_for('rotate_servo2') }}", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("rotation="+rotation);
             }

@@ -10,10 +10,13 @@ class Camera:
     MAX_ANGLE = 140
     SERVO_1 = 18
     SERVO_2 = 17
+    LOW_RESOLUTION = (640, 360)
+    MED_RESOLUTION = (1280, 720)
+    HIGH_RESOLUTION = (1920, 1080)
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
-        self.__camera.resolution = (1920, 1080)
+        self.__camera.resolution = self.LOW_RESOLUTION
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
@@ -45,6 +48,19 @@ class Camera:
             self.servo2_rotation = self.servo2_rotation + angle
 
     @property
+    def resolution(self):
+        return self.__camera.resolution
+
+    @resolution.setter
+    def resolution(self, resolution):
+        if resolution == "LOW":
+            self.__camera.resolution = self.LOW_RESOLUTION
+        elif resolution == "MEDIUM":
+            self.__camera.resolution = self.MED_RESOLUTION
+        elif resolution == "HIGH":
+            self.__camera.resolution = self.HIGH_RESOLUTION
+
+    @property
     def servo1_rotation(self):
         return self.__servo1_rotation
 
@@ -70,7 +86,7 @@ class Camera:
 
     def detect_people(self, image):
         image = cv2.imdecode(np.fromstring(image, np.uint8), 1)
-        boxes, weights = self.__hog.detectMultiScale(image, winStride=(4, 4), padding=(8, 8), scale=1.05)
+        boxes, weights = self.__hog.detectMultiScale(image, winStride=(8, 8), padding=(8, 8), scale=1.5)
         boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
         for (xA, yA, xB, yB) in boxes:
             cv2.rectangle(image, (xA, yA), (xB, yB), (0,  255, 0), 2)
