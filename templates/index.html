@@ -8,10 +8,10 @@
     </head>
     <body>
         <img src="{{ url_for('camera') }}">
-        <button type="button" onclick="rotate_servo1(15)">Rotate Up</button>
-        <button type="button" onclick="rotate_servo1(-15)">Rotate Down</button>
-        <button type="button" onclick="rotate_servo2(-15)">Rotate Left</button>
-        <button type="button" onclick="rotate_servo2(15)">Rotate Right</button>
+        <button type="button" onclick="rotate_servo1(5)">Rotate Up</button>
+        <button type="button" onclick="rotate_servo1(-5)">Rotate Down</button>
+        <button type="button" onclick="rotate_servo2(5)">Rotate Left</button>
+        <button type="button" onclick="rotate_servo2(-5)">Rotate Right</button>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
         <script>
             function rotate_servo1(rotation) {
