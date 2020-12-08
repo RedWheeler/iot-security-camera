@@ -24,7 +24,7 @@ def camera():
 
 @app.route('/toggle_sweep', methods=['POST'])
 def toggle_sweep():
-    pi_camera.should_sweep = not pi_camera.sweep
+    pi_camera.should_sweep = not pi_camera.should_sweep
     return 'OK', 202
 
 
