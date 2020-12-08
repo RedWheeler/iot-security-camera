@@ -1,6 +1,8 @@
 import picamera
 import pigpio
 import io
+import cv2
+import numpy as np
 
 
 class Camera:
@@ -12,7 +14,10 @@ class Camera:
     def __init__(self):
         self.__camera = picamera.PiCamera()
         self.__camera.resolution = (640, 480)
+        self.__hog = cv2.HOGDescriptor()
+        self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
+        self.object_detection = True
         self.__sweep_angle = 5
         # Servo init
         self.__pi = pigpio.pi()
@@ -63,6 +68,15 @@ class Camera:
         else:
             raise ValueError(f"Value must be between {self.MIN_ANGLE} and {self.MAX_ANGLE}")
 
+    def detect_people(self, image):
+        image = cv2.imdecode(np.fromstring(image, np.uint8), 1)
+        boxes, weights = self.__hog.detectMultiScale(image, winStride=(8, 8))
+        boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
+        for (xA, yA, xB, yB) in boxes:
+            cv2.rectangle(image, (xA, yA), (xB, yB), (0, 255, 0), 2)
+        _, result = cv2.imencode('.JPEG', image)
+        return result.tobytes()
+
     def get_frame(self):
         if self.should_sweep:
             # flip sweep direction when min or max angle is reached
@@ -74,4 +88,7 @@ class Camera:
         # Read new image into stream
         self.__camera.capture(stream, format='jpeg')
         stream.seek(0)
-        return stream.read()
+        if self.object_detection:
+            return self.detect_people(stream.read())
+        else:
+            return stream.read()
