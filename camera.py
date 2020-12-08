@@ -67,4 +67,4 @@ class Camera:
         self.__stream.truncate(0)
         # Read new image into stream
         self.__camera.capture(self.__stream, format='jpeg')
-        return self.__stream
+        return self.__stream.read()
