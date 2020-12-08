@@ -11,7 +11,7 @@ class Camera:
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
-        self.__camera.resolution = (1024, 768)
+        self.__camera.resolution = (640, 480)
         # Servo init
         self.__pi = pigpio.pi()
         self.__servo1_rotation = 90
