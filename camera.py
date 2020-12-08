@@ -70,8 +70,7 @@ class Camera:
 
     def detect_people(self, image):
         image = cv2.imdecode(np.fromstring(image, np.uint8), 1)
-        gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-        boxes, weights = self.__hog.detectMultiScale(gray, winStride=(8, 8))
+        boxes, weights = self.__hog.detectMultiScale(image, winStride=(4, 4), padding=(8, 8), scale=1.05)
         boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
         for (xA, yA, xB, yB) in boxes:
             cv2.rectangle(image, (xA, yA), (xB, yB), (0, 255, 0), 2)
