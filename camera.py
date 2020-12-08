@@ -13,7 +13,7 @@ class Camera:
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
-        self.__camera.resolution = (640, 480)
+        self.__camera.resolution = (640, 360)
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
