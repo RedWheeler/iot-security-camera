@@ -22,8 +22,15 @@ def camera():
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+@app.route('/toggle_sweep', methods=['POST'])
+def toggle_sweep():
+    pi_camera.should_sweep = not pi_camera.sweep
+    return 'OK', 202
+
+
 @app.route('/rotate_servo1', methods=['POST'])
 def rotate_servo1():
+    pi_camera.should_sweep = False
     rotation = int(request.form['rotation'])
     pi_camera.rotate_servo1(rotation)
     return 'OK', 202
@@ -31,6 +38,7 @@ def rotate_servo1():
 
 @app.route('/rotate_servo2', methods=['POST'])
 def rotate_servo2():
+    pi_camera.should_sweep = False
     rotation = int(request.form['rotation'])
     pi_camera.rotate_servo2(rotation)
     return 'OK', 202

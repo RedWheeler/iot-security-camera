@@ -12,19 +12,27 @@
             <button type="button" onclick="rotate_servo1(-5)">Rotate Down</button>
             <button type="button" onclick="rotate_servo2(5)">Rotate Left</button>
             <button type="button" onclick="rotate_servo2(-5)">Rotate Right</button>
+            <input type="checkbox" onclick="toggle_sweep()" id="sweep">Sweep</input>
         </div>
         <div>
             <img src="{{ url_for('camera') }}">
         </div>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
         <script>
+            function toggle_sweep() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "{{ url_for('toggle_sweep') }}", false);
+                xhttp.send();
+            }
             function rotate_servo1(rotation) {
+                document.getElementById("sweep").checked = false;
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "{{ url_for('rotate_servo1') }}", false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send("rotation="+rotation);
             }
             function rotate_servo2(rotation) {
+                document.getElementById("sweep").checked = false;
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "{{ url_for('rotate_servo2') }}", false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

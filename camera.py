@@ -12,6 +12,8 @@ class Camera:
     def __init__(self):
         self.__camera = picamera.PiCamera()
         self.__camera.resolution = (640, 480)
+        self.should_sweep = False
+        self.__sweep_angle = 5
         # Servo init
         self.__pi = pigpio.pi()
         self.__servo1_rotation = 90
@@ -62,6 +64,11 @@ class Camera:
             raise ValueError(f"Value must be between {self.MIN_ANGLE} and {self.MAX_ANGLE}")
 
     def get_frame(self):
+        if self.should_sweep:
+            # flip sweep direction when min or max angle is reached
+            if self.servo1_rotation >= self.MAX_ANGLE or self.servo1_rotation <= self.MIN_ANGLE:
+                self.__sweep_angle *= -1
+            self.rotate_servo2(self.__sweep_angle)
         # Clear stream
         stream = io.BytesIO()
         # Read new image into stream
