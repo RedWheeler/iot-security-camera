@@ -43,7 +43,7 @@ class Camera:
 
     @servo1_rotation.setter
     def servo1_rotation(self, angle):
-        if self.MIN_ANGLE < angle < self.MAX_ANGLE:
+        if self.MIN_ANGLE <= angle <= self.MAX_ANGLE:
             self.__servo1_rotation = angle
             self.__pi.set_servo_pulsewidth(self.SERVO_1, 500 + (angle / 180) * 2000)
         else:
@@ -55,7 +55,7 @@ class Camera:
 
     @servo2_rotation.setter
     def servo2_rotation(self, angle):
-        if self.MIN_ANGLE < angle < self.MAX_ANGLE:
+        if self.MIN_ANGLE <= angle <= self.MAX_ANGLE:
             self.__servo2_rotation = angle
             self.__pi.set_servo_pulsewidth(self.SERVO_2, 500 + (angle / 180) * 2000)
         else:
