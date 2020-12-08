@@ -29,7 +29,7 @@ class Camera:
             self.servo1_rotation = self.servo1_rotation + angle
 
     # Increment servo 2's rotation by the specified angle
-    def rotate_servo1(self, angle):
+    def rotate_servo2(self, angle):
         if self.__servo2_rotation + angle > self.MAX_ANGLE:
             self.servo2_rotation = self.MAX_ANGLE
         elif self.__servo2_rotation + angle < self.MIN_ANGLE:
