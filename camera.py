@@ -17,7 +17,7 @@ class Camera:
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
-        self.object_detection = True
+        self.object_detection = False
         self.__sweep_angle = 5
         # Servo init
         self.__pi = pigpio.pi()
