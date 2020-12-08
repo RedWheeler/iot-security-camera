@@ -10,7 +10,6 @@ class Camera:
     SERVO_2 = 18
 
     def __init__(self):
-        self.__stream = io.BytesIO()
         self.__camera = picamera.PiCamera()
         # Servo init
         self.__pi = pigpio.pi()
@@ -63,8 +62,8 @@ class Camera:
 
     def get_frame(self):
         # Clear stream
-        self.__stream.truncate(0)
+        stream = io.BytesIO()
         # Read new image into stream
-        self.__camera.capture(self.__stream, format='jpeg')
-        self.__stream.seek(0)
-        return self.__stream.read()
+        self.__camera.capture(stream, format='jpeg')
+        stream.seek(0)
+        return stream.read()
