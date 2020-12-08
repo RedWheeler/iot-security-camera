@@ -7,11 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <img src="{{ url_for('camera') }}">
-        <button type="button" onclick="rotate_servo1(5)">Rotate Up</button>
-        <button type="button" onclick="rotate_servo1(-5)">Rotate Down</button>
-        <button type="button" onclick="rotate_servo2(5)">Rotate Left</button>
-        <button type="button" onclick="rotate_servo2(-5)">Rotate Right</button>
+        <div>
+            <button type="button" onclick="rotate_servo1(5)">Rotate Up</button>
+            <button type="button" onclick="rotate_servo1(-5)">Rotate Down</button>
+            <button type="button" onclick="rotate_servo2(5)">Rotate Left</button>
+            <button type="button" onclick="rotate_servo2(-5)">Rotate Right</button>
+        </div>
+        <div>
+            <img src="{{ url_for('camera') }}">
+        </div>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
         <script>
             function rotate_servo1(rotation) {
