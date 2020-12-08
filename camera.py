@@ -13,7 +13,7 @@ class Camera:
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
-        self.__camera.resolution = (640, 360)
+        self.__camera.resolution = (1920, 1080)
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
@@ -73,7 +73,7 @@ class Camera:
         boxes, weights = self.__hog.detectMultiScale(image, winStride=(4, 4), padding=(8, 8), scale=1.05)
         boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
         for (xA, yA, xB, yB) in boxes:
-            cv2.rectangle(image, (xA, yA), (xB, yB), (0, 255, 0), 2)
+            cv2.rectangle(image, (xA, yA), (xB, yB), (0,  255, 0), 2)
         _, result = cv2.imencode('.JPEG', image)
         return result.tobytes()
 
