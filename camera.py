@@ -6,8 +6,8 @@ import io
 class Camera:
     MIN_ANGLE = 50
     MAX_ANGLE = 140
-    SERVO_1 = 17
-    SERVO_2 = 18
+    SERVO_1 = 18
+    SERVO_2 = 17
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
