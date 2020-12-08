@@ -79,17 +79,19 @@ class Camera:
         return result.tobytes()
 
     def get_frame(self):
-        if self.should_sweep:
-            # flip sweep direction when min or max angle is reached
-            if self.servo2_rotation >= self.MAX_ANGLE or self.servo2_rotation <= self.MIN_ANGLE:
-                self.__sweep_angle *= -1
-            self.rotate_servo2(self.__sweep_angle)
-        # Clear stream
         stream = io.BytesIO()
-        # Read new image into stream
-        self.__camera.capture(stream, format='jpeg')
-        stream.seek(0)
-        if self.object_detection:
-            return self.detect_people(stream.read())
-        else:
-            return stream.read()
+        for _ in self.__camera.capture_continuous(stream, 'jpeg', use_video_port=True):
+            if self.should_sweep:
+                # flip sweep direction when min or max angle is reached
+                if self.servo2_rotation >= self.MAX_ANGLE or self.servo2_rotation <= self.MIN_ANGLE:
+                    self.__sweep_angle *= -1
+                self.rotate_servo2(self.__sweep_angle)
+
+            stream.seek(0)
+            if self.object_detection:
+                yield self.detect_people(stream.read())
+            else:
+                yield stream.read()
+
+            stream.seek(0)
+            stream.truncate()
