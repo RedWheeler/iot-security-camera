@@ -31,6 +31,7 @@ def toggle_sweep():
 @app.route('/toggle_object_detection', methods=['POST'])
 def toggle_object_detection():
     pi_camera.object_detection = not pi_camera.object_detection
+    return 'OK', 202
 
 
 @app.route('/rotate_servo1', methods=['POST'])
