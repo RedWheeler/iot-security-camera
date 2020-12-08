@@ -66,7 +66,7 @@ class Camera:
     def get_frame(self):
         if self.should_sweep:
             # flip sweep direction when min or max angle is reached
-            if self.servo1_rotation >= self.MAX_ANGLE or self.servo1_rotation <= self.MIN_ANGLE:
+            if self.servo2_rotation >= self.MAX_ANGLE or self.servo2_rotation <= self.MIN_ANGLE:
                 self.__sweep_angle *= -1
             self.rotate_servo2(self.__sweep_angle)
         # Clear stream
