@@ -24,13 +24,13 @@ def camera():
 
 @app.route('/rotate_servo1', methods=['POST'])
 def rotate_servo1():
-    rotation = request.form['rotation']
+    rotation = int(request.form['rotation'])
     pi_camera.rotate_servo1(rotation)
     return 'OK', 202
 
 
 @app.route('/rotate_servo2', methods=['POST'])
 def rotate_servo2():
-    rotation = request.form['rotation']
+    rotation = int(request.form['rotation'])
     pi_camera.rotate_servo2(rotation)
     return 'OK', 202
