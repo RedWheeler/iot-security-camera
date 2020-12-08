@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, Response
-from pi_camera import Camera
+from camera import Camera
 
 app = Flask(__name__)
 pi_camera = Camera()

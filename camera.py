@@ -63,8 +63,8 @@ class Camera:
 
     def get_frame(self):
         # Clear stream
-        self.__stream.seek(0)
         self.__stream.truncate(0)
         # Read new image into stream
         self.__camera.capture(self.__stream, format='jpeg')
+        self.__stream.seek(0)
         return self.__stream.read()
