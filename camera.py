@@ -11,13 +11,12 @@ class Camera:
     SERVO_1 = 18
     SERVO_2 = 17
     LOW_RESOLUTION = (640, 360)
-    MED_RESOLUTION = (1280, 720)
-    HIGH_RESOLUTION = (1920, 1080)
+    HIGH_RESOLUTION = (1280, 720)
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
         self.__camera.resolution = self.HIGH_RESOLUTION
-        self.__resize = self.LOW_RESOLUTION
+        self.__resize = self.HIGH_RESOLUTION
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
@@ -56,8 +55,6 @@ class Camera:
     def resolution(self, resolution):
         if resolution == "LOW":
             self.__resize = self.LOW_RESOLUTION
-        elif resolution == "MEDIUM":
-            self.__resize = self.MED_RESOLUTION
         elif resolution == "HIGH":
             self.__resize = self.HIGH_RESOLUTION
 

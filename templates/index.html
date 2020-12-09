@@ -33,12 +33,11 @@
         <div class="d-flex justify-content-center">
             <select id="resolution" onchange="change_resolution()">
                 <option value="LOW">360p</option>
-                <option value="MEDIUM">720p</option>
-                <option value="HIGH">1080p</option>
+                <option value="HIGH">720p</option>
             </select>
         </div>
         <div class="d-flex justify-content-center m-3">
-            <img height="360" width="640" src="{{ url_for('camera') }}">
+            <img height="720" width="1280" src="{{ url_for('camera') }}">
         </div>
         <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
         <script>
