@@ -54,11 +54,11 @@ class Camera:
     @resolution.setter
     def resolution(self, resolution):
         if resolution == "LOW":
-            self.__camera.resolution = self.LOW_RESOLUTION
+            self.__camera.resolution = (640, 360)
         elif resolution == "MEDIUM":
-            self.__camera.resolution = self.MED_RESOLUTION
+            self.__camera.resolution = (1280, 720)
         elif resolution == "HIGH":
-            self.__camera.resolution = self.HIGH_RESOLUTION
+            self.__camera.resolution = (1920, 1080)
 
     @property
     def servo1_rotation(self):
