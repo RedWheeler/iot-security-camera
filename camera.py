@@ -16,7 +16,8 @@ class Camera:
 
     def __init__(self):
         self.__camera = picamera.PiCamera()
-        self.__camera.resolution = self.LOW_RESOLUTION
+        self.__camera.resolution = self.HIGH_RESOLUTION
+        self.__resize = self.LOW_RESOLUTION
         self.__hog = cv2.HOGDescriptor()
         self.__hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.should_sweep = False
@@ -49,16 +50,16 @@ class Camera:
 
     @property
     def resolution(self):
-        return self.__camera.resolution
+        return self.__resize
 
     @resolution.setter
     def resolution(self, resolution):
         if resolution == "LOW":
-            self.__camera.resolution = (640, 360)
+            self.__resize = self.LOW_RESOLUTION
         elif resolution == "MEDIUM":
-            self.__camera.resolution = (1280, 720)
+            self.__resize = self.MED_RESOLUTION
         elif resolution == "HIGH":
-            self.__camera.resolution = (1920, 1080)
+            self.__resize = self.HIGH_RESOLUTION
 
     @property
     def servo1_rotation(self):
@@ -102,7 +103,7 @@ class Camera:
         # Clear stream
         stream = io.BytesIO()
         # Read new image into stream
-        self.__camera.capture(stream, format='jpeg')
+        self.__camera.capture(stream, resize=self.__resize, format='jpeg')
         stream.seek(0)
         if self.object_detection:
             return self.detect_people(stream.read())
