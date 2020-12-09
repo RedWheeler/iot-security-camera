@@ -21,7 +21,7 @@ def gen():
 def camera():
     return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/change_resolution')
+@app.route('/change_resolution', methods=['POST'])
 def change_resolution():
     resolution = request.form['resolution']
     pi_camera.resolution = resolution
